@@ -1,0 +1,13 @@
+.container{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.sidebar{
+    width: 30%;
+}
+
+.content{ 
+    width: 70%;
+}

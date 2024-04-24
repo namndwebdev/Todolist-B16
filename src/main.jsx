@@ -4,7 +4,7 @@ import App from './App'
 import Login from './components/Login'
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    {/* <App/> */}
-    <Login/>
+    <App/>
+    {/* <Login/> */}
   </React.StrictMode>,
 )
