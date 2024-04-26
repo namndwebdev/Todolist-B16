@@ -1,10 +1,12 @@
 import { useRef, useState } from "react"
 import axios from 'axios'
+import { useNavigate } from "react-router-dom"
 
 export default function Login(){
     const usernameRef = useRef(null)
     const passwordRef = useRef(null)
     const [taikhoan, setTaikhoan] = useState({})
+    const nav = useNavigate()
 
     function dangnhap(){
         let username = usernameRef.current.value
@@ -20,6 +22,7 @@ export default function Login(){
         }).then(function(res){
             setTaikhoan(res.data.user)
             localStorage.setItem('token', res.data.jwt)
+            nav('/')
         }).catch(function(err){
             alert('Dang nhap that bai')
         })

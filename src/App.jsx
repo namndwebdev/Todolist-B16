@@ -3,9 +3,10 @@ import Child from './Child'
 import axios from 'axios'
 import Login from './components/Login'
 import './App.css'
+import { Link, useNavigate } from 'react-router-dom'
 export default function App(){
     const [tasks, setTasks] = useState([])
-    
+    const nav = useNavigate()
     useEffect(()=>{
         let config = {
             method: 'get',
@@ -74,9 +75,6 @@ export default function App(){
 
     return (<>
         <div className="container">
-            <div className='sidebar'>
-                <Login/>
-            </div>
             <div className='content'>
                 <input type="text" ref={inputRef}/>
                 <button onClick={add}>Them</button>
