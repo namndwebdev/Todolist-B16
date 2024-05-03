@@ -32,6 +32,23 @@ export default function Child(props){
           });
     }
 
+    function deleteTask(){
+        let config = {
+            method: 'delete',
+            url: `https://backoffice.nodemy.vn/api/tasks/${props.id}`,
+            headers: { 
+              'Authorization': `Bearer ${localStorage.getItem('token')}`
+            }
+          };
+          
+          axios.request(config)
+          .then((response) => {
+            props.xoa(props.id)
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+    }
     return (<>
         <h1> 
             {props.name} <input type="text" ref={inputref}/>
@@ -39,9 +56,7 @@ export default function Child(props){
                 onClick={updateTask}
             >Update</button>
 
-            <button onClick={()=>{
-                props.xoa(props.name)
-            }}>Xoa</button>
+            <button onClick={deleteTask}>Xoa</button>
             <button onClick={()=>{
                 nav(`/tasks/${props.id}`)
             }}>Xem chi tiet</button>

@@ -7,6 +7,7 @@ import { Link, useNavigate } from 'react-router-dom'
 export default function App(){
     const [tasks, setTasks] = useState([])
     const nav = useNavigate()
+    const [showError, setShowError] = useState(false)
     useEffect(()=>{
         let config = {
             method: 'get',
@@ -30,40 +31,48 @@ export default function App(){
 
     const inputRef = useRef(null)
     function add(){
-        let data = JSON.stringify({
-            "data": {
-              "title": inputRef.current.value
-            }
-          });
-          
-          let config = {
-            method: 'post',
-            url: 'https://backoffice.nodemy.vn/api/tasks',
-            headers: { 
-              'Content-Type': 'application/json', 
-              'Authorization': `Bearer ${localStorage.getItem('token')}`
-            },
-            data : data
-          };
-          
-          axios.request(config)
-          .then((response) => {
-            console.log('ban da them thanh cong');
-            let objectMoiThem = response.data.data
-            tasks.unshift(objectMoiThem)
-            setTasks([...tasks])
-          })
-          .catch((error) => {
-            console.log(error);
-          });
+        if(inputRef.current.value){
+            let data = JSON.stringify({
+                "data": {
+                  "title": inputRef.current.value
+                }
+              });
+              
+              let config = {
+                method: 'post',
+                url: 'https://backoffice.nodemy.vn/api/tasks',
+                headers: { 
+                  'Content-Type': 'application/json', 
+                  'Authorization': `Bearer ${localStorage.getItem('token')}`
+                },
+                data : data
+              };
+              
+              axios.request(config)
+              .then((response) => {
+                console.log('ban da them thanh cong');
+                let objectMoiThem = response.data.data
+                tasks.unshift(objectMoiThem)
+                setTasks([...tasks])
+              })
+              .catch((error) => {
+                console.log(error);
+              });
+        }else{
+            // khong co gia tri
+            setShowError(true)
+            setTimeout(()=>{
+                setShowError(false)
+            }, 2000)
+        }
     }
     
-    function xoa(giaTriMuonXoa){
-        var newData = data.filter(item=>{
-            return item != giaTriMuonXoa
+    function xoa(idTask){
+        var newTasks = tasks.filter(item => {
+            return item.id != idTask
         })
 
-        setData([...newData])
+        setTasks([...newTasks])
     }
 
     function sua(idTask, titleTask){
@@ -80,6 +89,7 @@ export default function App(){
         <div className="container">
             <div className='content'>
                 <input type="text" ref={inputRef}/>
+                {showError ? <p>Input phai co gia tri</p> : null}
                 <button onClick={add}>Them</button>
 
                 {tasks.map(item=>{
