@@ -82,6 +82,7 @@ export default function App(){
                 {tasks.map(item=>{
                     return <Child 
                         key={item?.id}
+                        id={item?.id}
                         name={item?.attributes?.title}
                         xoa={xoa}
                         sua={sua}
