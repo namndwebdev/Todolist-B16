@@ -1,21 +1,42 @@
 import { useRef } from "react"
 import { useNavigate } from "react-router-dom"
+import axios from 'axios'
 
 export default function Child(props){
     const inputref = useRef(null)
     const nav = useNavigate()
+    function updateTask(){
+        var token = localStorage.getItem('token')
+        let data = JSON.stringify({
+            "data": {
+              "title": inputref.current.value,
+            }
+          });
+          
+          let config = {
+            method: 'put',
+            url: `https://backoffice.nodemy.vn/api/tasks/${props.id}`,
+            headers: { 
+              'Content-Type': 'application/json', 
+              'Authorization': `Bearer ${token}`
+            },
+            data : data
+          };
+          
+          axios.request(config)
+          .then((response) => {
+            props.sua(props.id, inputref.current.value)
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+    }
+
     return (<>
         <h1> 
             {props.name} <input type="text" ref={inputref}/>
             <button
-            onClick={  ()=>{
-
-                props.sua(props.name, inputref.current.value) 
-
-
-            }  }
-            
-            
+                onClick={updateTask}
             >Update</button>
 
             <button onClick={()=>{

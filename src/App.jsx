@@ -66,11 +66,14 @@ export default function App(){
         setData([...newData])
     }
 
-    function sua(timkiem, giatriMoi){
-        var vitri = data.indexOf(timkiem)
-        
-        data[vitri] = giatriMoi
-        setData([...data])
+    function sua(idTask, titleTask){
+        var taskSearch = tasks.find(item=> {
+            return item.id == idTask
+        });
+
+        taskSearch.attributes.title = titleTask
+
+        setTasks([...tasks])
     }
 
     return (<>
