@@ -5,7 +5,7 @@ export default function PrivateRouter(props){
     let userTxt = localStorage.getItem('user')
     let user = JSON.parse(userTxt)
     
-    if(token && !user.blocked){
+    if(token && user && !user.blocked){
         // da dang nhap
         return props.children
     }else{
