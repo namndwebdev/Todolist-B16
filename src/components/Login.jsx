@@ -22,6 +22,7 @@ export default function Login(){
         }).then(function(res){
             setTaikhoan(res.data.user)
             localStorage.setItem('token', res.data.jwt)
+            localStorage.setItem('user', JSON.stringify(res.data.user))
             nav('/')
         }).catch(function(err){
             alert('Dang nhap that bai')

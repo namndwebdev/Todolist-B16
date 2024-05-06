@@ -6,20 +6,25 @@ import Blog from './components/Blog'
 import BaseLayout from './components/BaseLayout'
 import TaskDetail from './components/TaskDetail'
 import { createBrowserRouter, Outlet, RouterProvider, Link } from 'react-router-dom' 
+import PrivateRouter from './components/PrivateRouter'
 
 const routerNodemy = createBrowserRouter([
   {
     path: '/', 
     element: <BaseLayout/>,
     children: [{
-      path: '/', element: <App/>
+      path: '/', element: <PrivateRouter>
+        <App/>
+      </PrivateRouter>
     },{
       path: 'login', element: <Login/>
     },{
       path: 'blogs/:tenBaiViet/:tacgia', element: <Blog/>
     }, {
       path: 'tasks/:id',
-      element: <TaskDetail/>
+      element: <PrivateRouter>
+        <TaskDetail/>
+      </PrivateRouter>
     }]
   }
 ])
