@@ -7,6 +7,8 @@ import BaseLayout from './components/BaseLayout'
 import TaskDetail from './components/TaskDetail'
 import { createBrowserRouter, Outlet, RouterProvider, Link } from 'react-router-dom' 
 import PrivateRouter from './components/PrivateRouter'
+import { Provider } from 'react-redux'
+import { store } from './redux/store'
 
 const routerNodemy = createBrowserRouter([
   {
@@ -31,6 +33,8 @@ const routerNodemy = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <RouterProvider router={routerNodemy}/>
+    <Provider store={store}>
+      <RouterProvider router={routerNodemy}/>
+    </Provider>
   </React.StrictMode>,
 )

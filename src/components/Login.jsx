@@ -1,12 +1,15 @@
 import { useRef, useState } from "react"
 import axios from 'axios'
 import { useNavigate } from "react-router-dom"
+import { useDispatch } from "react-redux"
+import { tang, vemore } from '../redux/moneySlice'
 
 export default function Login(){
     const usernameRef = useRef(null)
     const passwordRef = useRef(null)
     const [taikhoan, setTaikhoan] = useState({})
     const nav = useNavigate()
+    const dispatch = useDispatch()
 
     function dangnhap(){
         let username = usernameRef.current.value
@@ -50,6 +53,12 @@ export default function Login(){
         });
     }
 
+    function tangTien(){
+        dispatch( tang(3) )
+    }
+    function resetTien(){
+        dispatch( vemore() )
+    }
     return (<>
         <h1>Xin chao tai khoan: {taikhoan?.email}</h1>
 
@@ -60,5 +69,8 @@ export default function Login(){
         <button onClick={dangnhap}>Dang nhap</button>
 
         <button onClick={getInfo}>Call API Profile</button>
+
+        <button onClick={tangTien}>Ban gia tri</button>
+        <button onClick={resetTien}>Reset</button>
     </>)
 }
