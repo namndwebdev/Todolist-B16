@@ -3,7 +3,7 @@ import axios from 'axios'
 import { useNavigate } from "react-router-dom"
 import { useDispatch } from "react-redux"
 import { tang, vemore } from '../redux/moneySlice'
-
+import { setUser } from "../redux/authSlice"
 export default function Login(){
     const usernameRef = useRef(null)
     const passwordRef = useRef(null)
@@ -26,6 +26,7 @@ export default function Login(){
             setTaikhoan(res.data.user)
             localStorage.setItem('token', res.data.jwt)
             localStorage.setItem('user', JSON.stringify(res.data.user))
+            dispatch(setUser(res.data.user))
             nav('/')
         }).catch(function(err){
             alert('Dang nhap that bai')
