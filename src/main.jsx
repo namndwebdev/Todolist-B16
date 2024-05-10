@@ -9,7 +9,7 @@ import { createBrowserRouter, Outlet, RouterProvider, Link } from 'react-router-
 import PrivateRouter from './components/PrivateRouter'
 import { Provider } from 'react-redux'
 import { store } from './redux/store'
-
+import './configs/axios'
 const routerNodemy = createBrowserRouter([
   {
     path: '/', 

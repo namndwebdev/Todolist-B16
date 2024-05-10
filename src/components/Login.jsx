@@ -16,7 +16,7 @@ export default function Login(){
         let password = passwordRef.current.value
 
         axios({
-            url: 'https://backoffice.nodemy.vn/api/auth/local',
+            url: '/auth/local',
             method: 'POST',
             data: {
                 "identifier": username,
@@ -38,10 +38,7 @@ export default function Login(){
 
         let config = {
         method: 'get',
-        url: 'https://backoffice.nodemy.vn/api/users/me?populate=role',
-        headers: { 
-            'Authorization': `Bearer ${localStorage.getItem('token')}`
-        },
+        url: '/users/me?populate=role',
         data : data
         };
 

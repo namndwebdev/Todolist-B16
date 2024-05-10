@@ -8,7 +8,7 @@ export default function TaskDetail(){
     useEffect(()=>{
         let config = {
             method: 'get',
-            url: `https://backoffice.nodemy.vn/api/tasks/${params.id}?populate=*`,
+            url: `/tasks/${params.id}?populate=*`,
           };
           
           axios.request(config)
@@ -34,11 +34,7 @@ export default function TaskDetail(){
       let config = {
         method: 'put',
         maxBodyLength: Infinity,
-        url: `https://backoffice.nodemy.vn/api/tasks/${params.id}`,
-        headers: { 
-          'Content-Type': 'application/json', 
-          'Authorization': `Bearer ${localStorage.getItem('token')}`
-        },
+        url: `/tasks/${params.id}`,
         data : data
       };
       
@@ -54,10 +50,7 @@ export default function TaskDetail(){
     function deleteTask(){
       let config = {
         method: 'delete',
-        url: `https://backoffice.nodemy.vn/api/tasks/${params.id}`,
-        headers: { 
-          'Authorization': `Bearer ${localStorage.getItem('token')}`
-        }
+        url: `/tasks/${params.id}`,
       };
 
       axios.request(config)

@@ -11,7 +11,7 @@ export default function App(){
     useEffect(()=>{
         let config = {
             method: 'get',
-            url: 'https://backoffice.nodemy.vn/api/tasks?populate=*&pagination[pageSize]=10&pagination[page]=1&sort[0]=createdAt:desc',
+            url: '/tasks?populate=*&pagination[pageSize]=10&pagination[page]=1&sort[0]=createdAt:desc',
             headers: { }
         };
         
@@ -40,11 +40,7 @@ export default function App(){
               
               let config = {
                 method: 'post',
-                url: 'https://backoffice.nodemy.vn/api/tasks',
-                headers: { 
-                  'Content-Type': 'application/json', 
-                  'Authorization': `Bearer ${localStorage.getItem('token')}`
-                },
+                url: '/tasks',
                 data : data
               };
               
