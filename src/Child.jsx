@@ -6,7 +6,6 @@ export default function Child(props){
     const inputref = useRef(null)
     const nav = useNavigate()
     function updateTask(){
-        var token = localStorage.getItem('token')
         let data = JSON.stringify({
             "data": {
               "title": inputref.current.value,

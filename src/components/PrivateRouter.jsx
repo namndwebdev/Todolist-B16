@@ -1,10 +1,10 @@
+import { useSelector } from "react-redux"
 import { Navigate } from "react-router-dom"
 
 export default function PrivateRouter(props){
-    let token = localStorage.getItem('token')
-    let userTxt = localStorage.getItem('user')
-    let user = JSON.parse(userTxt)
-    
+    const user = useSelector(state=> state.auth.user)
+    const token = useSelector(state=> state.auth.token)
+
     if(token && user && !user.blocked){
         // da dang nhap
         return props.children

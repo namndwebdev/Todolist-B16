@@ -9,6 +9,8 @@ import { createBrowserRouter, Outlet, RouterProvider, Link } from 'react-router-
 import PrivateRouter from './components/PrivateRouter'
 import { Provider } from 'react-redux'
 import { store } from './redux/store'
+import { PersistGate } from 'redux-persist/integration/react'
+import { persistStore } from 'redux-persist'
 import './configs/axios'
 const routerNodemy = createBrowserRouter([
   {
@@ -31,10 +33,14 @@ const routerNodemy = createBrowserRouter([
   }
 ])
 
+let persistor = persistStore(store);
+
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <Provider store={store}>
-      <RouterProvider router={routerNodemy}/>
+      <PersistGate loading={null} persistor={persistor}>
+        <RouterProvider router={routerNodemy}/>
+      </PersistGate>
     </Provider>
   </React.StrictMode>,
 )
