@@ -12,6 +12,8 @@ import { store } from './redux/store'
 import { PersistGate } from 'redux-persist/integration/react'
 import { persistStore } from 'redux-persist'
 import './configs/axios'
+import Test from './Test'
+import './test.css'
 const routerNodemy = createBrowserRouter([
   {
     path: '/', 
@@ -37,10 +39,11 @@ let persistor = persistStore(store);
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <Provider store={store}>
+    <Test/>
+    {/* <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
         <RouterProvider router={routerNodemy}/>
       </PersistGate>
-    </Provider>
+    </Provider> */}
   </React.StrictMode>,
 )
